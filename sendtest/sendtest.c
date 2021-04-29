@@ -4,6 +4,7 @@ Pacer transmission test
 
 WARNING: Do not take anything in this code as authoritative as to the spec.
 
+TODO: Need to byte-swap the 32-bit fields 
 
 */
 

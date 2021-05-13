@@ -122,6 +122,22 @@ void print_replies(void)
 
 	DumpHex(&buf,bytes);
 
+	// Correct endianeness
+	pkt->sequence = ntohl(pkt->sequence);
+	pkt->timeline_id = ntohl(pkt->timeline_id);
+
+	pkt->ref_seconds = ntohll(pkt->ref_seconds);
+	pkt->ref_fractional = ntohl(pkt->ref_fractional);
+	pkt->ref_timescale = ntohl(pkt->ref_timescale);
+
+	pkt->offset_seconds = ntohll(pkt->offset_seconds);
+	pkt->offset_fractional = ntohl(pkt->offset_fractional);
+	pkt->offset_timescale = ntohl(pkt->offset_timescale);
+
+	pkt->time_seconds = ntohll(pkt->time_seconds);
+	pkt->time_fractional = ntohl(pkt->time_fractional);
+	pkt->time_timescale = ntohl(pkt->time_timescale);
+
 	printf("Version: %u  Message Type: %u  Timecode hint: %u\n",pkt->version,pkt->message_type,pkt->version);
 
 	printf("Sender ID: ");

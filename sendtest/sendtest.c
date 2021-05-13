@@ -109,20 +109,20 @@ void send_packet(char *broadcast_address, uint8_t timeline_status, uint64_t time
 
 	memset(&pkt,0,sizeof(pkt));
 
-	pkt.timeline_id = timeline_id;
+	pkt.timeline_id = htonl(timeline_id);
 	pkt.timeline_status = timeline_status;
 
-	pkt.sequence = sequence;
+	pkt.sequence = htonl(sequence);
 
-	pkt.time_seconds = timeline_seconds;
-	pkt.time_fractional = timeline_fractional;
-	pkt.time_timescale = timeline_timescale;
+	pkt.time_seconds = htonll(timeline_seconds);
+	pkt.time_fractional = htonl(timeline_fractional);
+	pkt.time_timescale = htonl(timeline_timescale);
 
 	gettimeofday(&tv,NULL);
 
-	pkt.ref_seconds = (uint64_t)tv.tv_sec;
-	pkt.ref_fractional = tv.tv_usec;
-	pkt.ref_timescale = 1000000;
+	pkt.ref_seconds = htonll((uint64_t)tv.tv_sec);
+	pkt.ref_fractional = htonl(tv.tv_usec);
+	pkt.ref_timescale = htonl(1000000);
 	
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_INET;
